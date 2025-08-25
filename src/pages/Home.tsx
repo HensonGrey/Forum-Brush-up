@@ -15,11 +15,11 @@ function Home() {
             alt="user avatar"
             className="rounded-full w-14 h-14 object-cover cursor-pointer"
           />
-          <p className="text-gray-800 text-sm font-medium">your username</p>
+          <p className="text-gray-800 text-sm font-medium">your email</p>
         </div>
       </nav>
 
-      <button className="fixed bottom-6 right-6 bg-red-500 text-white font-semibold px-4 py-2 rounded-2xl shadow-md hover:bg-red-600 transition">
+      <button className="fixed bottom-6 right-6 bg-red-500 text-white font-semibold px-4 py-2 rounded-2xl shadow-md cursor-pointer hover:bg-red-600 transition">
         Sign out
       </button>
     </div>

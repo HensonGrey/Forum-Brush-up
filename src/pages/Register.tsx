@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 
 function Register() {
@@ -9,6 +10,10 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [error, setError] = useState<string>("");
 
+  const token = localStorage.getItem("token")
+
+  const navigate = useNavigate();
+
   const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(password !== confirmPassword){
@@ -16,16 +21,23 @@ function Register() {
     }
     else{
       try{
-        await axios.post("https://localhost:5000/register", {
+        await axios.post("http://localhost:5000/register", {
           email,
           password
         })
+
+        navigate('/')
       }
-      catch(error){
-        console.error(`Error during registration. ${error}`)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      catch(err: any){
+        setError(err.response.data.message);
       }
     }
   }
+
+  useEffect(() => {
+    if(token) navigate('/dashboard')
+  }, [token, navigate])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
